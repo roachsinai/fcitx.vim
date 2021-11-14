@@ -5,50 +5,41 @@ scriptencoding utf-8
 " URL:		https://www.vim.org/scripts/script.php?script_id=3764
 " ---------------------------------------------------------------------
 " Load Once:
-if &cp || exists("g:loaded_fcitx") || (!exists('$DISPLAY') && !exists('$WAYLAND_DISPLAY'))
+if &cp || exists("g:loaded_fcitx")
   finish
 endif
 let s:keepcpo = &cpo
 set cpo&vim
 
-" If g:fcitx5_remote is set (to the path to `fcitx5-remove`), use it to toggle IME state.
-if exists("g:fcitx5_remote")
-  function Fcitx2en()
-    let inputstatus = trim(system(g:fcitx5_remote))
-    if inputstatus == '2'
-      let b:inputtoggle = 1
-      call system(g:fcitx5_remote . ' -c')
-    endif
-  endfunction
-  function Fcitx2zh()
-    try
-      if b:inputtoggle == 1
-        call system(g:fcitx5_remote . ' -o')
-        let b:inputtoggle = 0
-      endif
-    catch /inputtoggle/
+let g:pinyin_icon_location = get(g:, 'pinyin_icon_location', ' 1715 1047 1734 1065 ')
+let g:pinyin_icon_pixels_sum = get(g:, 'pinyin_icon_pixels_sum', '-1285013265')
+let s:win_input_shift = expand('<sfile>:h:h') . '/bin/analog_input_shift.exe'
+let s:ims_icon_recongnize = expand('<sfile>:h:h') . '/bin/pinyin_icon_recognize.exe'
+
+function GetInputStatus()
+  return trim(system(s:ims_icon_recongnize . g:pinyin_icon_location . g:pinyin_icon_pixels_sum))
+endfunction
+
+function Fcitx2en()
+  let inputstatus = GetInputStatus()
+  if inputstatus == '2'
+    let b:inputtoggle = 1
+    call system(s:win_input_shift)
+  endif
+endfunction
+
+function Fcitx2zh()
+  try
+    if b:inputtoggle == 1
+      call system(s:win_input_shift)
       let b:inputtoggle = 0
-    endtry
-  endfunction
-
-  let g:loaded_fcitx = 1
-
-" Otherwise, if python3 is available, use python and dbus to toggle IME state.
-elseif has('python3')
-  try " abort on fail
-    exe 'py3file' expand('<sfile>:r') . '.py'
-    if py3eval('fcitx_loaded')
-      function Fcitx2en()
-        py3 fcitx2en()
-      endfunction
-      function Fcitx2zh()
-        py3 fcitx2zh()
-      endfunction
-
-      let g:loaded_fcitx = 1
     endif
+  catch /inputtoggle/
+    let b:inputtoggle = 0
   endtry
-endif
+endfunction
+
+let g:loaded_fcitx = 1
 
 " Register autocmd if successfully loaded.
 if exists("g:loaded_fcitx")
