@@ -24,14 +24,14 @@ function Fcitx2en()
   let inputstatus = GetInputStatus()
   if inputstatus == '2'
     let b:inputtoggle = 1
-    call system(s:win_input_shift)
+    call system(s:win_input_shift . ' 30')
   endif
 endfunction
 
 function Fcitx2zh()
   try
     if b:inputtoggle == 1
-      call system(s:win_input_shift)
+      call system(s:win_input_shift . ' 70')
       let b:inputtoggle = 0
     endif
   catch /inputtoggle/
