@@ -15,6 +15,8 @@ After you setting variable `g:inputmethod_icon_location` in Cmdline, you can get
 
 Source code and compile command of binaries under `bin` directory at [windows-im-shift-cpp](https://github.com/roachsinai/windows-im-shift-cpp).
 
+What's more, this plugin will not work when the input method icon shift along taskbar after you set its location. Maybe you should disable the notification of Windows screenshot tools, as notification icon on taskbar will show each time you use these tools.
+
 # Acknowledgements
 
 This repo only works for Windows (only in WSL on Windows11 tested), as original repo created by @lilydjwg is good enough for Linux!
