@@ -20,6 +20,10 @@ function GetInputStatus()
   return trim(system(s:imputmethod_icon_recongnize . g:inputmethod_icon_location . g:inputmethod_icon_pixels_sum))
 endfunction
 
+function GetIMIconPixelsSum()
+  return trim(system(s:imputmethod_icon_recongnize . g:inputmethod_icon_location))
+endfunction
+
 function IM2en()
   let inputstatus = GetInputStatus()
   if inputstatus == '2'
