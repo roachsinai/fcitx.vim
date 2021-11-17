@@ -49,8 +49,8 @@ if exists("g:loaded_fcitx")
     au InsertLeave * call IM2en()
   endif
   au InsertEnter * call IM2native()
-  au CmdlineEnter [/\?] call IM2native()
-  au CmdlineLeave [/\?] call IM2en()
+  " au CmdlineEnter [/\?] call IM2native()
+  " au CmdlineLeave [/\?] call IM2en()
 endif
 
 " ---------------------------------------------------------------------
