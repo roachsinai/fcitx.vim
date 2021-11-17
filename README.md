@@ -13,4 +13,8 @@ let g:inputmethod_icon_pixels_sum = '-1285013265'
 
 After you setting variable `g:inputmethod_icon_location` in Cmdline, you can get the value which should set to `g:inputmethod_icon_pixels_sum` by `:echo GetIMIconPixelsSum()`.
 
-Origin repo is created by @lilydjw for Linux, this repo only works for Windows (only test in WSL on Windows11).
+Source code and compile command of binaries under `bin` directory at [windows-im-shift-cpp](https://github.com/roachsinai/windows-im-shift-cpp).
+
+# Acknowledgements
+
+This repo only works for Windows (only in WSL on Windows11 tested), as original repo created by @lilydjwg is good enough for Linux!
