@@ -12,15 +12,15 @@ let s:keepcpo = &cpo
 set cpo&vim
 
 let g:inputmethod_icon_location = get(g:, 'inputmethod_icon_location', ' 1715 1047 1734 1065 ')
-let g:inputmethod_icon_pixels_sum = get(g:, 'inputmethod_icon_pixels_sum', '-1285013265')
+let g:inputmethod_icon_different_pixel_value_threshold = get(g:, 'inputmethod_icon_different_pixel_value_threshold', '25')
 let s:win_input_shift = expand('<sfile>:h:h') . '/bin/analog_input_shift.exe'
 let s:imputmethod_icon_recongnize = expand('<sfile>:h:h') . '/bin/inputmethod_icon_recognize.exe'
 
 function GetInputStatus()
-  return trim(system(s:imputmethod_icon_recongnize . g:inputmethod_icon_location . g:inputmethod_icon_pixels_sum))
+  return trim(system(s:imputmethod_icon_recongnize . g:inputmethod_icon_location . g:inputmethod_icon_different_pixel_value_threshold))
 endfunction
 
-function GetIMIconPixelsSum()
+function GetIMIconConditionValue()
   return trim(system(s:imputmethod_icon_recongnize . g:inputmethod_icon_location))
 endfunction
 

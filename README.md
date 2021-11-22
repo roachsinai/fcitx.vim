@@ -7,11 +7,12 @@ You have to define two variable to let it work:
 " order: left top right below, and beware the spaces along both sides of each number
 let g:inputmethod_icon_location = ' 1715 1047 1734 1065 '
 
-" pixel values sum of your native language's input method icon on task bar
-let g:inputmethod_icon_pixels_sum = '-1285013265'
+" if different pixel value of your native language's input method icon on task bar
+" is smaller than threashold analog shift will be triggered when you switch Vim mode
+let g:inputmethod_icon_different_pixel_value_threshold = '25'
 ```
 
-After you setting variable `g:inputmethod_icon_location` in Cmdline, you can get the value which should set to `g:inputmethod_icon_pixels_sum` by `:echo GetIMIconPixelsSum()`.
+After you setting variable `g:inputmethod_icon_location` in Cmdline, you can get the value which should set to `g:inputmethod_icon_different_pixel_value_threshold` by `:echo GetIMIconConditionValue()`.
 
 Source code and compile command of binaries under `bin` directory at [windows-im-shift-cpp](https://github.com/roachsinai/windows-im-shift-cpp).
 
