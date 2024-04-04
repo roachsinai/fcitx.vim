@@ -5,7 +5,7 @@ scriptencoding utf-8
 " URL:		https://www.vim.org/scripts/script.php?script_id=3764
 " ---------------------------------------------------------------------
 " Load Once:
-if &cp || exists("g:loaded_fcitx") || (!exists('$DISPLAY') && !exists('$WAYLAND_DISPLAY') && !has('win32'))
+if &cp || exists("g:loaded_fcitx") || (!exists('$DISPLAY') && !exists('$WAYLAND_DISPLAY') && !has('win32') && !has('macunix'))
   finish
 endif
 let s:keepcpo = &cpo
@@ -14,15 +14,15 @@ set cpo&vim
 function s:setup_cmd()
   function Fcitx2en()
     let inputstatus = trim(system(g:fcitx5_remote))
-    if inputstatus == '2'
+    if inputstatus == 'com.apple.inputmethod.SCIM.ITABC'
       let b:inputtoggle = 1
-      call system(g:fcitx5_remote . ' -c')
+      call system(g:fcitx5_remote . ' com.apple.keylayout.ABC')
     endif
   endfunction
   function Fcitx2zh()
     try
       if b:inputtoggle == 1
-        call system(g:fcitx5_remote . ' -o')
+        call system(g:fcitx5_remote . ' com.apple.inputmethod.SCIM.ITABC')
         let b:inputtoggle = 0
       endif
     catch /inputtoggle/
